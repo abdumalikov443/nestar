@@ -31,7 +31,7 @@ export class LoggingInterceptor implements NestInterceptor {
                     this.logger.log(`${this.stringify(context)} - ${responseTime}ms \n\n`, "RESPONSE");
                 }),
             );
-        }
+        } return next.handle();
     }
 
     private stringify(context: ExecutionContext): string {
