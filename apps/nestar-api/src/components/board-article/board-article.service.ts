@@ -40,7 +40,7 @@ export class BoardArticleService {
     public async getBoardArticle(memberId: ObjectId, articleId: ObjectId): Promise<BoardArticle> {
         const search: T = {
             _id: articleId,
-            propertyStatus: BoardArticleStatus.ACTIVE
+            articleStatus: BoardArticleStatus.ACTIVE
         };
         //@ts-ignore
         const targetBoardArticle: BoardArticle = await this.boardArticleModel.findOne(search).lean().exec();
@@ -84,7 +84,7 @@ export class BoardArticleService {
 
     public async getBoardArticles(memberId: ObjectId, input: BoardArticlesInquiry): Promise<BoardArticles> {
         const { articleCategory, text } = input.search;
-        const match: T = { propertyStatus: BoardArticleStatus.ACTIVE };
+        const match: T = { articleStatus: BoardArticleStatus.ACTIVE };
         const sort: T = { [input?.sort ?? 'createdAt'] : input?.direction ?? Direction.DESC };
 
         if (articleCategory) match.articleCategory = articleCategory;
